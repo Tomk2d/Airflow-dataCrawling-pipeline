@@ -64,7 +64,8 @@ wrtn-crack-crawling/
 <br>
 
 ## DB 다이어그램
-<img width="2232" height="1124" alt="categories" src="https://github.com/user-attachments/assets/4dc5680c-28e1-4381-857a-caa3d4550c1c" />
+<img width="2232" height="1124" alt="image" src="https://github.com/user-attachments/assets/03f541a2-579c-456c-a079-37e85a5050f8" />
+
 
 <br>
 
@@ -119,7 +120,8 @@ chmod +x setup_docker.sh
 ### 1. 비동기 병렬 처리 크롤링을 통한 성능 개선
 
 #### 기존 크롤링 동기 처리
-<img width="690" height="478" alt="image" src="https://github.com/user-attachments/assets/91afbdcd-e2e6-4159-ad33-4befe89e885c" />
+<img width="1380" height="956" alt="image" src="https://github.com/user-attachments/assets/d5dd8fa8-88b5-404f-b51b-774734afac11" />
+
 
 - Collection 를 반복문으로 돌면서, 해당하는 캐릭터 데이터 크롤링
 - Collection 에서 캐릭터를 불러오는 요청이 **페이징** 으로 구현되어 있고, **nextCursor** 를 활용하여 다음 작업을 명시하고 있었음
@@ -128,8 +130,8 @@ chmod +x setup_docker.sh
 <br>
 
 #### 개선 크롤링 비동기 병렬 처리
-<img width="584" height="599" alt="image" src="https://github.com/user-attachments/assets/6b83d554-53bb-41a0-8b38-8de36554c5fb" />
-<img width="853" height="297" alt="image" src="https://github.com/user-attachments/assets/32f70d97-597a-4e82-ba45-bfa5de5ba7b1" />
+<img width="1168" height="1198" alt="image" src="https://github.com/user-attachments/assets/75d14e0e-62b1-4b7a-a56d-88ab7e8d8d6b" />
+<img width="1706" height="594" alt="image" src="https://github.com/user-attachments/assets/2eab4034-ce5d-4f9e-81a1-b44e419cec2f" />
 
 - Collection 레벨 병렬 처리: 모든 Collection을 동시에 처리. 개별 Collection 은 동기적으로 nextCursor 활용
 - 비동기 I/O 활용: HTTP 요청 대기 시간을 효율적으로 활용
@@ -142,8 +144,8 @@ chmod +x setup_docker.sh
 <br>
 
 #### 결과
-<img width="703" height="27" alt="image" src="https://github.com/user-attachments/assets/59a85d26-2abe-4098-9521-7d9738eb3b8a" />
-<img width="700" height="34" alt="image" src="https://github.com/user-attachments/assets/17709fad-bf7c-4a9a-9e84-edb5b5577209" />
+<img width="530" height="19" alt="image" src="https://github.com/user-attachments/assets/15f9da92-e209-4b05-bd61-ca7ef1eb59d2" />
+<img width="500" height="24" alt="image" src="https://github.com/user-attachments/assets/1361d97c-6391-44fa-9e00-dcd5c764f7bd" />
 
 - 단축된 시간: 704.56초 (약 11분 45초)
 - 개선율: 55.49%
@@ -155,7 +157,7 @@ chmod +x setup_docker.sh
 ### 2. 관계 테이블을 활용한 조회 성능 개선 및 정규화
 
 #### 기존 DB 다이어그램
-<img width="728" height="250" alt="image" src="https://github.com/user-attachments/assets/45a0c223-1196-409a-ac50-170828c704e8" />
+<img width="1456" height="500" alt="image" src="https://github.com/user-attachments/assets/0e7b85e7-35c3-4304-b70c-ff7b6bf43a3b" />
 
 
 - Collections 에서 JSONB 형식으로 Characters 의 id 를 갖는 구조
@@ -165,7 +167,7 @@ chmod +x setup_docker.sh
 <br>
 
 #### 개선 DB 다이어그램
-<img width="647" height="368" alt="image" src="https://github.com/user-attachments/assets/89dfed77-a661-4f11-9356-6a2f89debd29" />
+<img width="1294" height="736" alt="image" src="https://github.com/user-attachments/assets/122d6e01-71ce-46de-a191-d8f2b241034a" />
 
 
 - 중간 관계 테이블을 설계하여 Collections 와 Characters 의 id 키를 외래키로 가짐
@@ -179,7 +181,7 @@ chmod +x setup_docker.sh
 ### 3. DB 접속 최소화와 실패 전략
 
 #### Bulk insert
-<img width="536" height="472" alt="image" src="https://github.com/user-attachments/assets/53deeca3-10c4-41bc-8e00-04270b31facb" />
+<img width="1072" height="944" alt="image" src="https://github.com/user-attachments/assets/b626312d-7976-426b-9bd0-556e9f70fd3d" />
 
 - Bulk insert 를 활용하여 1번의 트랜잭션으로 대규모 데이터 삽입
 - 최소한의 데이터베이스 접근
@@ -188,8 +190,8 @@ chmod +x setup_docker.sh
 <br>
 
 #### Individual insert 
-<img width="609" height="580" alt="image" src="https://github.com/user-attachments/assets/83dd2fd5-9051-4c29-b61b-f72e50638498" />
-<img width="838" height="330" alt="image" src="https://github.com/user-attachments/assets/851b682f-1334-4cb2-aaea-7c62d7b41686" />
+<img width="1218" height="1160" alt="image" src="https://github.com/user-attachments/assets/f9cf810f-2c3d-4ae0-ad15-832c8027aaba" />
+<img width="1676" height="660" alt="image" src="https://github.com/user-attachments/assets/b66c0e76-1221-4ad2-a55e-49b957beca2e" />
 
 - Bulk insert 의 경우 하나의 데이터라도 잘못되면 전부 rollback. 실패시 어떠한 데이터인지 찾기 어려움
 - Bulk insert 실패시, 해당 함수를 통해 개별로 insert 진행하고, 실패한 데이터를 JSON 파일로 저장
