@@ -57,7 +57,8 @@ wrtn-crack-crawling/
 <br>
 
 ## 플로우 차트
-<img width="4347" height="3793" alt="image" src="https://github.com/user-attachments/assets/c1006f6d-d7ab-40a8-8886-19e4772d2caf" />
+<img width="620" height="544" alt="image" src="https://github.com/user-attachments/assets/d5f54d4a-9837-4142-96c0-5c6a5f648568" />
+
 
 <br>
 <br>
