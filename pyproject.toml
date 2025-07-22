@@ -1,0 +1,25 @@
+[project]
+name = "crack-crawling"
+version = "0.1.0"
+description = "뤼튼테크놀로지스 인턴 과제 전형"
+authors = [
+    {name = "Shin Uijin",email = "wwy00@naver.com"}
+]
+readme = "README.md"
+requires-python = "^3.8"
+dependencies = [
+    "requests>=2.31.0",
+    "sqlalchemy>=1.4.49,<2.0.0",
+    "psycopg2-binary>=2.9.0",
+    "python-dotenv>=1.0.0",
+    "apache-airflow[postgres]>=2.7.0",
+    "beautifulsoup4>=4.12.0",
+    "aiohttp>=3.8.0"
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
