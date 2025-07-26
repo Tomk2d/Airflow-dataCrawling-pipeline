@@ -123,7 +123,7 @@ chmod +x setup_docker.sh
 
 - Collection 를 반복문으로 돌면서, 해당하는 캐릭터 데이터 크롤링
 - Collection 에서 캐릭터를 불러오는 요청이 **페이징** 으로 구현되어 있고, **nextCursor** 를 활용하여 다음 작업을 명시하고 있었음
-- 개별 Collection 내에서는 nextCursor 를 활용하여 동기적으로 요청하지만, 커서들을 병렬적으로 처리하는 방식으로 개선코드 작성
+- **개별 Collection 내** 에서는 nextCursor 를 활용하여 **동기적** 으로 요청하지만, **커서들을 병렬적으로 처리** 하는 방식으로 개선코드 작성
 
 <br>
 
@@ -131,13 +131,13 @@ chmod +x setup_docker.sh
 <img width="1168" height="1198" alt="image" src="https://github.com/user-attachments/assets/75d14e0e-62b1-4b7a-a56d-88ab7e8d8d6b" />
 <img width="1706" height="594" alt="image" src="https://github.com/user-attachments/assets/2eab4034-ce5d-4f9e-81a1-b44e419cec2f" />
 
-- Collection 레벨 병렬 처리: 모든 Collection을 동시에 처리. 개별 Collection 은 동기적으로 nextCursor 활용
-- 비동기 I/O 활용: HTTP 요청 대기 시간을 효율적으로 활용
-- 재시도 메커니즘: 네트워크 오류에 대한 안정성 강화
+- **Collection 레벨** : **병렬 처리.** 모든 Collection을 **동시**에 처리
+  **개별 Collection 레벨** : 은 동기적으로 nextCursor 활용
+- **비동기 I/O 활용** : HTTP 요청 대기 시간을 효율적으로 활용
+- **재시도 메커니즘** : 네트워크 오류에 대한 안정성 강화
 
-- asyncio 라이브러리 활용
-- asyncio.gather()를 통한 병렬 실행
-- to_thread()를 통한 동기 함수 비동기 래핑
+- asyncio 라이브러리 활용. **gather()** 를 통한 **병렬 실행**
+- **to_thread()** 를 통한 동기 함수 **비동기 래핑**
 
 <br>
 
@@ -157,8 +157,8 @@ chmod +x setup_docker.sh
 #### 기존 DB 다이어그램
 <img width="1456" height="500" alt="image" src="https://github.com/user-attachments/assets/0e7b85e7-35c3-4304-b70c-ff7b6bf43a3b" />
 
-
-- Collections 에서 JSONB 형식으로 Characters 의 id 를 갖는 구조
+- **다대다 연결** 이 필요
+- Collections 에서 **JSONB** 형식으로 **Characters 의 id** 를 갖는 구조
 - Characters 에서 JSONB 필드를 통한 복잡한 데이터 구조
 - 단일 테이블에 모든 정보를 저장하는 비정규화 구조
 
@@ -168,9 +168,9 @@ chmod +x setup_docker.sh
 <img width="1294" height="736" alt="image" src="https://github.com/user-attachments/assets/122d6e01-71ce-46de-a191-d8f2b241034a" />
 
 
-- 중간 관계 테이블을 설계하여 Collections 와 Characters 의 id 키를 외래키로 가짐
-- 데이터 정규화를 통한 중복 제거 및 일관성 보장
-- 인덱스와 JOIN 을 통한 조회 성능 최적화
+- **중간 관계 테이블** 을 설계하여 Collections 와 Characters 의 id 키를 **외래키** 로 가짐
+- 데이터 **정규화** 를 통한 **중복 제거** 및 **일관성 보장**
+- **인덱스** 와 **JOIN** 을 통한 **조회 성능 최적화**
 
 <br>
 
@@ -181,8 +181,8 @@ chmod +x setup_docker.sh
 #### Bulk insert
 <img width="1072" height="944" alt="image" src="https://github.com/user-attachments/assets/b626312d-7976-426b-9bd0-556e9f70fd3d" />
 
-- Bulk insert 를 활용하여 1번의 트랜잭션으로 대규모 데이터 삽입
-- 최소한의 데이터베이스 접근
+- **Bulk insert** 를 활용하여 **1번의 트랜잭션** 으로 **대규모 데이터 삽입**
+- **최소한의 데이터베이스 접근**
 - 병목 현상 최소화
 
 <br>
@@ -191,8 +191,8 @@ chmod +x setup_docker.sh
 <img width="1218" height="1160" alt="image" src="https://github.com/user-attachments/assets/f9cf810f-2c3d-4ae0-ad15-832c8027aaba" />
 <img width="1676" height="660" alt="image" src="https://github.com/user-attachments/assets/b66c0e76-1221-4ad2-a55e-49b957beca2e" />
 
-- Bulk insert 의 경우 하나의 데이터라도 잘못되면 전부 rollback. 실패시 어떠한 데이터인지 찾기 어려움
-- Bulk insert 실패시, 해당 함수를 통해 개별로 insert 진행하고, 실패한 데이터를 JSON 파일로 저장
+- Bulk insert 의 경우 하나의 데이터라도 잘못되면 **전부 rollback.** 실패시 어떠한 데이터인지 찾기 어려움
+- **Bulk insert 실패시,** 해당 함수를 통해 **개별로 insert** 진행하고, **실패한 데이터를 JSON 파일** 로 저장
 - 디버깅 및 데이터 전처리 효과
 
 
